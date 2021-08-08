@@ -9,21 +9,25 @@ public class inicio {
 esta classe, em seguida crie um objeto cliente, defina as instancias deste
 objeto e apresente as informações deste objeto no console.*/
 	
-		Scanner leia = new Scanner(System.in);
+			//OBJETOS
+			Cliente exemplo1 = new Cliente ();
+			Scanner leia = new Scanner (System.in);
+			
+			//ENTRADAS
+			exemplo1.nome = "Renata";
+			exemplo1.anoNascimento = 1994;
+			exemplo1.telefone = 9888888;
+			
+			//SAÍDAS
+			exemplo1.mostrarNome();
+			exemplo1.mostrarIdade();
+			exemplo1.mostrarTelefone();
+			
+			//ENTRADAS E SAÍDAS
+			System.out.println("O cliente está com debito? Digite 'S' para sim ou 'N' para não: ");
+			exemplo1.status = leia.next().toUpperCase().charAt(0);
+			exemplo1.mostrarStatus();
+		}
 
-		Cliente cliente1 = new Cliente ();
-		
-		System.out.println("Nome:");
-	    cliente1.nome = leia.next();
-	    
-	    System.out.println("codigo :");
-	    cliente1.codigo= leia.nextInt();
-	    
-	    System.out.println("ano Nascimento:");
-	    cliente1.anoNascimento = leia.nextInt();
-	    
-	    cliente1.idade(2021);
-	    System.out.println("Nome:" + cliente1.nome + "/t Codigo:" + cliente1.codigo);
-	    
-	}
+
 }
