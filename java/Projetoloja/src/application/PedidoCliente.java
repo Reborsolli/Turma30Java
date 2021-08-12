@@ -13,8 +13,8 @@ public class PedidoCliente {
 		String y = "Grupo1";
 		double somaValorTotal = 0.0;
 		char formaDePagamento;
+		int pos = -1;
 
-		// List<Carrinho> carrinho = new ArrayList<>();
 
 		char op = 'S';
 
@@ -31,10 +31,11 @@ public class PedidoCliente {
 
 		do {
 			loja.mostraCabecalhoNF();
-			System.out.printf("Deseja Fazer compras?[S/N] ");
+			System.out.printf("Deseja fazer compras?[S/N] ");
 			op = leia.next().toUpperCase().charAt(0);
 			if (op == 'S') {
 				do {
+					System.out.println();
 					loja.mostraCabecalhoLoja();
 					for (Produto x : vitrine) {
 						System.out.printf("%s \t %.2f \t %d \t\t %s\n", x.getCodigo(), x.getValor(), x.getEstoque(),
@@ -42,49 +43,64 @@ public class PedidoCliente {
 					}
 					carrinho.mostraCarrinho();
 
-					System.out.printf("\nInforme o codigo do produto que deseja comprar: ");
+					System.out.printf("\nInforme o código do produto que deseja comprar: ");
 					String codCar = leia.next().toUpperCase();
-					for (Produto x : vitrine) {
-						if (codCar.equals(x.getCodigo())) {
-							System.out.printf("Informe a quantidade desejada de %s: ", x.getNome());
-							int qtdCar = leia.nextInt();
-							if (qtdCar > 0 && qtdCar <= x.getEstoque()) {
-								carrinho.entraCarrinho(x.getNome(), codCar, x.getValor(), qtdCar);
-								somaValorTotal += (qtdCar * x.getValor());
-								System.out.println("Total: R$ " + somaValorTotal);
-								x.retiraEstoque(qtdCar);
-
-							} else {
-								System.out.println("Estoque indisponível, verifique a lista e tente novamente");
-								System.out.println("Aperte qualquer tecla e enter para recomeçar.");
-								y = leia.next();
-							}
-
+					
+					for (int x=0; x<vitrine.size(); x++) { //VERIFICA SE O CÓGIDO INFORMADO É IGUAL À ALGUM DOS EXISTENTES NO MENU E GUARDA TAL POSIÇÃO NA LISTA
+						if (vitrine.get(x).getCodigo().equals(codCar)) {
+							pos = x;
+							break;
 						}
+						pos = -1;
 					}
-					System.out.print("\nDeseja continuar comprando? [S/N]");
+					
+					if (pos >= 0) {
+						System.out.printf("Informe a quantidade desejada de %s: ", vitrine.get(pos).getNome());
+						int qtdCar = leia.nextInt();
+						if (qtdCar > 0 && qtdCar <= vitrine.get(pos).getEstoque()) {
+							carrinho.entraCarrinho(vitrine.get(pos).getNome(), codCar, vitrine.get(pos).getValor(), qtdCar);
+							somaValorTotal += (qtdCar * vitrine.get(pos).getValor());
+							System.out.println("Total: R$ " + somaValorTotal);
+							vitrine.get(pos).retiraEstoque(qtdCar);
+
+						} else {
+							System.out.println("Estoque indisponível, verifique a lista e tente novamente.");
+							System.out.println("Aperte qualquer tecla e enter para recomeçar.");
+							y = leia.next();
+						}
+
+					}
+					else {
+						System.out.println("\nCódigo inválido.");
+					}
+
+					System.out.print("\nDeseja continuar comprando?[S/N] ");
 					op = leia.next().toUpperCase().charAt(0);
 
 				} while (op == 'S'); // FIM DO LAÇO DA VITRINE (DO PEDIDO DO CLIENTE), AGORA SEGUE PARA PAGAMENTO
 
-				do {
-				loja.menuPagamento();
-				formaDePagamento = leia.next().charAt(0);
+				do {  //LAÇO PARA REPETIR CASO O CLIENTE COLOQUE UMA FORMA DE PAGAMENTO INEXISTENTE
+					System.out.println();
+					loja.menuPagamento();
+					formaDePagamento = leia.next().charAt(0);
 				} while (formaDePagamento != '1' && formaDePagamento != '2'  && formaDePagamento != '3');
 				
+				System.out.println();
 				loja.mostraCabecalhoNF();
-				carrinho.mostraCarrinho();
+				carrinho.mostraCarrinhoNF();
 				loja.formaDePagamento(formaDePagamento, somaValorTotal);
 				carrinho.limparCarrinho();
 				
 				System.out.printf("\nDeseja voltar ao início?[S/N] ");
 				op = leia.next().toUpperCase().charAt(0);
+				if(op == 'N') {
+					System.out.println("~ ~ Até Breve!");
+				}
 				
 			} else {
-				System.out.println("~ ~ Ate Breve!");
+				System.out.println("~ ~ Até Breve!");
 			}
 		} while (op == 'S');
 
 	}
-
 }

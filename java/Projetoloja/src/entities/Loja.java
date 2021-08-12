@@ -2,6 +2,7 @@ package entities;
 
 public class Loja {
 	public void mostraCabecalhoLoja() {
+		System.out.println();
 		System.out.println("\t\t    * DONNUTIX *");
 		System.out.println("\t\t~ Seu Donnut, nosso Mix ~\n");
 		System.out.println("\t\t    *** MENU ***\n");
@@ -10,6 +11,7 @@ public class Loja {
 	}
 
 	public void mostraCabecalhoNF() {
+		System.out.println();
 		System.out.println("\t\t    * DONNUTIX *");
 		System.out.println("\t\t~ Seu Donnut, nosso Mix ~\n");
 	}
