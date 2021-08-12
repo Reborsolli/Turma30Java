@@ -9,7 +9,7 @@ public class dW {
 		
 		Scanner leia = new Scanner (System.in);
 		
-		
+		System.out.println();
 		double nota=0 ,  total =0;
 		int quantidadeNota=0;
 

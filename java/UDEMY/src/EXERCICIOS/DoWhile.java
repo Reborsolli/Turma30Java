@@ -9,6 +9,8 @@ public class DoWhile {
 		
 		Scanner leia = new Scanner (System.in);
 		
+		syso
+
 		
 		double notas=0 ,  Totalnotas =0;
 		int quantidadeNota=0;
