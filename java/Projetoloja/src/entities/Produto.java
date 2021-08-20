@@ -5,7 +5,7 @@ public class Produto {
 	private String codigo;
 	private double valor;
 	private int estoque;
-	
+
 	public Produto() {
 		super();
 	}
@@ -58,12 +58,10 @@ public class Produto {
 
 	public void retiraEstoque(int decremento) {
 		/*
-		if (decremento > this.estoque) {
-			System.out.println("QUANTIDADE INDISPONÍVEL");
-		} else {
-			this.estoque = this.estoque - decremento;
-		}
-		*/
+		 * if (decremento > this.estoque) {
+		 * System.out.println("QUANTIDADE INDISPONÍVEL"); } else { this.estoque =
+		 * this.estoque - decremento; }
+		 */
 		this.estoque = this.estoque - decremento;
 	}
 
