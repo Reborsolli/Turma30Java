@@ -27,4 +27,33 @@ CREATE TABLE tb_usuario (
 
 ALTER TABLE `tb_postagem` ADD CONSTRAINT `tb_postagem_fk0` FOREIGN KEY (`usr_post`) REFERENCES `tb_usuario`(`email`);
 
+
+
+
+
+
+
+
+0	230	13:32:36	insert into tb_pizza ( id_pizza , sabor_pizza, preco, preco_broto, categoria) 
+ values (111, "Mussarella", 35.00 , 20.00 , "Salgada") , (222, "Calabresa", 35.00 , 20.00 , "Salgada"),
+  (333, "Palmito", 45.00 , 30.00 , "Salgada"), (444, "Brocolis" , 45.00 , 20.00 , "Vegetariana"),
+  ( 555 , " Carne seca" , 50.00 , 30.00 , "Salgada especial") , (666 , " 5 queijos " , 50.00 , 35.00 , "Salgada" ),
+  (777, "Chocolate " , 55.00 , 35.00 , "Doce ") , ( 888 , "Morango com chocolate" , 60.00 , 40.00 , "Doce especial")	Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`db_pizzaria_legal2`.`tb_pizza`, CONSTRAINT `tb_pizza_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `tb_categoria` (`categoria`))	0.094 sec
+
+3	228	13:31:45	insert into tb_categoria ( categoria , tipo_massa , borda) 
+ values ("Doce", "Nomal" , "N") , ("Doce especial", "Nomal" , "S"), 
+ ("Salgada", "Nomal" , "s"),("Salgada especial", "integral" , "N"),("Vegetariana", "integral" , "N")	5 row(s) affected
+ Records: 5  Duplicates: 0  Warnings: 0	0.172 sec
+
+
+
+
+
+
+
+
+
+
+
+
 ALTER TABLE `tb_postagem` ADD CONSTRAINT `tb_postagem_fk1` FOREIGN KEY (`tema_id`) REFERENCES `tb_tema`(`id_tema`);
