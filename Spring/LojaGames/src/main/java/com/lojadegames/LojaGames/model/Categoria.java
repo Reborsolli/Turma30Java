@@ -1,4 +1,4 @@
-package org.generation.blogPessoal.model;
+package com.lojadegames.LojaGames.model;
 
 import java.util.List;
 
@@ -9,46 +9,54 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
 
 @Entity
-@Table (name = "tb_tema")
-
-
-	public class Tema {
+@Table (name = "tb_categoria")
+public class Categoria {
+	
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@NotNull
-	private String  descricao ;
+	@Size(max = 25)
+	private String descricao;
 	
-	@OneToMany (mappedBy = "tema", cascade =  CascadeType.ALL)
-	@JsonIgnoreProperties ("tema")
-	private List<Postagem> postagem;
-	
+	@OneToMany (mappedBy = "categoria" , cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties ("categoria")
+	private List<Produto>produto;
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public List<Postagem> getPostagem() {
-		return postagem;
+
+	public List<Produto> getProduto() {
+		return produto;
 	}
-	public void setPostagem(List<Postagem> postagem) {
-		this.postagem = postagem;
+
+	public void setProduto(List<Produto> produto) {
+		this.produto = produto;
 	}
+
 	
 	
-	
+
 
 }
