@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table (name =" tb_usuario")
+@Table (name ="tb_usuario")
 
 public class Usuario {
 
