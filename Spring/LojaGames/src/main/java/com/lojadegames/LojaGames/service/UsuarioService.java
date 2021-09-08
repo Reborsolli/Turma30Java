@@ -1,21 +1,21 @@
-package org.generation.blogPessoal.service;
+package com.lojadegames.LojaGames.service;
+
 import java.nio.charset.Charset;
 import java.util.Optional;
-
 import org.apache.commons.codec.binary.Base64;
-import org.generation.blogPessoal.model.UserLogin;
-import org.generation.blogPessoal.model.Usuario;
-import org.generation.blogPessoal.repository.UsuarioReository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.lojadegames.LojaGames.model.UserLogin;
+import com.lojadegames.LojaGames.model.Usuario;
+import com.lojadegames.LojaGames.repository.UsuarioRepository;
 
 
 @Service
 public class UsuarioService {
 
     @Autowired
-    private UsuarioReository repository;
+    private UsuarioRepository repository;
 
     public Optional<Usuario> CadastrarUsuario(Usuario usuario) {
     	Optional<Usuario> user= repository.findByUsuario(usuario.getUsuario());
@@ -54,3 +54,6 @@ public class UsuarioService {
     }
 
 }
+
+
+
