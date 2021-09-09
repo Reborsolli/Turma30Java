@@ -1,5 +1,6 @@
 package org.generation.blogPessoal.service;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.codec.binary.Base64;
@@ -7,8 +8,10 @@ import org.generation.blogPessoal.model.UserLogin;
 import org.generation.blogPessoal.model.Usuario;
 import org.generation.blogPessoal.repository.UsuarioReository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 
 @Service
@@ -18,6 +21,7 @@ public class UsuarioService {
     private UsuarioReository repository;
 
     public Optional<Usuario> CadastrarUsuario(Usuario usuario) {
+    	
     	Optional<Usuario> user= repository.findByUsuario(usuario.getUsuario());
     	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     	if (user.isPresent()) {
@@ -52,5 +56,27 @@ public class UsuarioService {
         }
         return null;
     }
+    public List<Usuario> listarUsuarios() {
 
+        return repository.findAll();
+
+    }
+
+public Optional<Usuario> atualizarUsuario(Usuario usuario) {
+
+        if (repository.findById(usuario.getId()).isPresent()) {
+
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+            String senhaEncoder = encoder.encode(usuario.getSenha());
+            usuario.setSenha(senhaEncoder);
+
+            return Optional.of(repository.save(usuario));
+
+        } else {
+
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!", null);
+
+        }
+    }
 }
